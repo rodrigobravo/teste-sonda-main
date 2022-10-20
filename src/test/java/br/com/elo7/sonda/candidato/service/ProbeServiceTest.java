@@ -2,6 +2,7 @@ package br.com.elo7.sonda.candidato.service;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import br.com.elo7.sonda.candidato.model.Planet;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -124,5 +125,21 @@ public class ProbeServiceTest {
 		assertEquals(2, probe.getX());
 		assertEquals(1, probe.getY());
 		assertEquals('E', probe.getDirection());
+	}
+
+	@Test
+	public void should_maintain_probe_position_from_0_0_S_To_0_0_S_when_receive_the_command_M() {
+		Probe probe = new Probe();
+		Planet planet = new Planet();
+		planet.setHeight(5);
+		planet.setWidth(5);
+		probe.setX(0);
+		probe.setY(0);
+		probe.setPlanet(planet);
+		probe.setDirection('S');
+		subject.applyCommandToProbe(probe, 'M');
+		assertEquals(0, probe.getX());
+		assertEquals(0, probe.getY());
+		assertEquals('S', probe.getDirection());
 	}
 }

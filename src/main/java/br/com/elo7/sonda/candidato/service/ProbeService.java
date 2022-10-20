@@ -53,16 +53,24 @@ public class ProbeService {
 		int newY = probe.getY();
 		switch (probe.getDirection()) {
 			case Direction.N:
-				newY++;
+				if (probe.getY() < probe.getPlanet().getHeight()){
+					newY++;
+				}
 				break;
 			case Direction.W:
-				newX--;
+				if (probe.getX() > probe.getPlanet().getWidth()){
+					newX--;
+				}
 				break;
 			case Direction.S:
-				newY--;
+				if (probe.getY() > probe.getPlanet().getHeight()){
+					newY--;
+				}
 				break;
 			case Direction.E:
-				newX++;
+				if (probe.getX() < probe.getPlanet().getWidth()){
+					newX++;
+				}
 				break;
 		}
 		probe.setX(newX);
